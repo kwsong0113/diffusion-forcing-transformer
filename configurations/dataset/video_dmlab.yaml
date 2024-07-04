@@ -2,7 +2,7 @@ defaults:
   - base_video
 
 save_dir: data/dmlab
-n_frames: 9 # TODO: increase later
+n_frames: 16 # TODO: increase later
 resolution: 64
 data_mean: 0.5
 data_std: 0.5
