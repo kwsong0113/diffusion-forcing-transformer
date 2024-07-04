@@ -32,7 +32,7 @@ diffusion:
   snr_clip: 5.0
   cum_snr_decay: 0.9
   # sampling
-  sampling_timesteps: 250
+  sampling_timesteps: 100
   ddim_sampling_eta: 0.0
   stabilization_level: 10
   # architecture
