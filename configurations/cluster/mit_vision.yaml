@@ -2,7 +2,7 @@ defaults:
   - base_slurm
 
 params:
-  env_name: df
+  env_name: df_transformer
   partition: vision-sitzmann
   qos: vision-sitzmann-main
   num_gpus: 8
