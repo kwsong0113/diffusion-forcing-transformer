@@ -6,7 +6,9 @@ This is a transformer implementation of paper [Diffusion Forcing: Next-token Pre
 
 This repo is coded by [Kiwhan Song](https://www.linkedin.com/in/kiwhan-song/), an amazing MIT undergrad working with Boyuan Chen and Vincent Sitzmann based on [Boyuan](https://boyuan.space/)'s research template repo.
 
-The content is not used in the original [Diffusion Forcing](https://boyuan.space/diffusion-forcing) paper but a reimplementation with better architecture for video generation. Original Diffusion Forcing code is RNN based to optimize for sequential decision making, while this repo uses Lucidrain's 3DUnet/Transformer optimized for video. This repo is released early due to popularity of Diffusion Forcing, and may contain certain bugs which we are trying to fix.
+The content is not used in the original [Diffusion Forcing](https://boyuan.space/diffusion-forcing) paper but a reimplementation with better architecture for video generation. Original Diffusion Forcing code is RNN based to optimize for sequential decision making, while this repo uses Lucidrain's 3DUnet/Transformer optimized for video.
+
+This repo was released in a rush due to popularity of Diffusion Forcing among large model community, and may contain certain bugs which we will fix. Please allow us a few days to release checkpoints and adjust default parameters! Right now auto-regressive sampling with this repo is expected to be slow, since transformer essentially denoises the whole sequence but the only take the next token. We plan to finalize the parameters of pyramid sampling soon and maybe use that by default.
 
 # Project Instructions
 
