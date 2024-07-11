@@ -22,6 +22,17 @@ Run `pip install -r requirements.txt` to install all dependencies.
 
 Then modify the wandb entity (account) in `configurations/config.yaml`.
 
+## Quick start with pretrained checkpoints
+
+Since dataset is huge, we provide a mini subset and pre-trained checkpoints for you to quickly test out our model! To do so, download mini dataset and checkpoints from [here](https://drive.google.com/file/d/16kAS1zu_ClMZFsLJZZn1qMInaNuW9hdP/view?usp=drive_link) to project root and extract with tar -xzvf quickstart.tar.gz. Files shall appear as `data/minecraft` and `outputs/minecraft.ckpt`.
+
+Then run the following commands and go to the wandb panel to see the results. Our visualization is side by side, with prediction on the left and ground truth on the right. However, ground truth is expected to not align with prediction since the sequence is highly stochastic. Ground truth is provided to provide an idea about quality only.
+
+Minecraft:
+`python -m main +name=sample_minecraft_pretrained algorithm.weight_decay=0.002 algorithm.diffusion.network_size=64 algorithm.diffusion.attn_dim_head=64 algorithm.diffusion.attn_resolutions=[16,32,64,128] algorithm.diffusion.beta_schedule=sigmoid algorithm.diffusion.clip_noise=6.0 algorithm.diffusion.cum_snr_decay=0.96 algorithm.diffusion.stabilization_level=15 experiment.training.lr=8e-5 load=outputs/minecraft.ckpt experiment.tasks=[validation]`
+
+To let the model rollout longer than it's trained on, simply append something like `dataset.validation_multiplier=8` to the above commands, and it will rollout `8x` longer than maximum sequence length it's trained on.
+
 ## Training
 
 ### DMLab
@@ -30,15 +41,11 @@ Then modify the wandb entity (account) in `configurations/config.yaml`.
 
 ### Minecraft
 
-`python -m main +name=your_experiment_name algorithm=df_video dataset=video_minecraft algorithm.weight_decay=0.004 algorithm.diffusion.network_size=64 algorithm.diffusion.attn_dim_head=64 algorithm.diffusion.attn_resolutions=[16,32,64,128] algorithm.diffusion.beta_schedule=sigmoid algorithm.diffusion.cum_snr_decay=0.96 algorithm.diffusion.clip_noise=6.0`
+`python -m main +name=your_experiment_name algorithm=df_video dataset=video_minecraft algorithm.weight_decay=0.002 algorithm.diffusion.network_size=64 algorithm.diffusion.attn_dim_head=64 algorithm.diffusion.attn_resolutions=[16,32,64,128] algorithm.diffusion.beta_schedule=sigmoid algorithm.diffusion.clip_noise=6.0 algorithm.diffusion.cum_snr_decay=0.96 algorithm.diffusion.stabilization_level=15 experiment.training.lr=8e-5 `
 
 ### No causal masking
 
 Simply append `algorithm.diffusion.use_causal_mask=False` to your command.
-
-### Pretrained ckpt
-
-Stay tuned for our pre-trained checkpoint release!
 
 ## Sampling
 

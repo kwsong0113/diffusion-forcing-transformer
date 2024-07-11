@@ -2,7 +2,7 @@ defaults:
   - base_video
 
 save_dir: data/minecraft
-n_frames: 14 # TODO: increase later
+n_frames: 10 # TODO: increase later
 resolution: 128
 data_mean: 0.5
 data_std: 0.5
