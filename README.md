@@ -33,6 +33,8 @@ Minecraft:
 
 To let the model rollout longer than it's trained on, simply append something like `dataset.validation_multiplier=8` to the above commands, and it will rollout `8x` longer than maximum sequence length it's trained on.
 
+The above checkpoint is trained for 100K steps.
+
 ## Training
 
 ### DMLab
