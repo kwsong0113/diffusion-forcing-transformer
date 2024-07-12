@@ -24,18 +24,24 @@ Then modify the wandb entity (account) in `configurations/config.yaml`.
 
 ## Quick start with pretrained checkpoints
 
-Since dataset is huge, we provide a mini subset and pre-trained checkpoints for you to quickly test out our model! To do so, download mini dataset and checkpoints from [here](https://drive.google.com/file/d/16kAS1zu_ClMZFsLJZZn1qMInaNuW9hdP/view?usp=drive_link) to project root and extract with tar -xzvf quickstart.tar.gz. Files shall appear as `data/minecraft` and `outputs/minecraft.ckpt`.
+Since dataset is huge, we provide a mini subset and pre-trained checkpoints for you to quickly test out our model! To do so, download mini dataset and checkpoints from [here](https://drive.google.com/file/d/16kAS1zu_ClMZFsLJZZn1qMInaNuW9hdP/view?usp=drive_link) to project root and extract with `tar -xzvf minecraft_3dunet.tar.gz`. Files shall appear as `data/minecraft` and `outputs/minecraft.ckpt`. Make sure you also git pull upstream to use latest version of code if you forked before ckpt release!
 
-Then run the following commands and go to the wandb panel to see the results. Our visualization is side by side, with prediction on the left and ground truth on the right. However, ground truth is expected to not align with prediction since the sequence is highly stochastic. Ground truth is provided to provide an idea about quality only.
+Then run the following commands and go to the wandb panel to see the results.
 
 Minecraft:
 `python -m main +name=sample_minecraft_pretrained algorithm.weight_decay=0.002 algorithm.diffusion.network_size=64 algorithm.diffusion.attn_dim_head=64 algorithm.diffusion.attn_resolutions=[16,32,64,128] algorithm.diffusion.beta_schedule=sigmoid algorithm.diffusion.clip_noise=6.0 algorithm.diffusion.cum_snr_decay=0.96 algorithm.diffusion.stabilization_level=15 experiment.training.lr=8e-5 load=outputs/minecraft.ckpt experiment.tasks=[validation]`
+
+Our visualization is side by side, with prediction on the left and ground truth on the right. However, ground truth is expected to not align with prediction since the sequence is highly stochastic. Ground truth is provided to provide an idea about quality only.
 
 To let the model rollout longer than it's trained on, simply append something like `dataset.validation_multiplier=8` to the above commands, and it will rollout `8x` longer than maximum sequence length it's trained on.
 
 The above checkpoint is trained for 100K steps.
 
 ## Training
+
+Video prediction requires downloading giant datasets. First, if you downloaded the mini subset following `Quick start with pretrained checkpoints` section, delete the mini subset folders `data/minecraft` and `data/dmlab`. Them just run the following commands: we've coded in python that it will download the dataset for you it doesn't already exist. Due to the slowness of the [source](https://github.com/wilson1yan/teco), this may take a couple days. If you prefer to do it yourself via bash script, please refer to the bash scripts in original [TECO dataset](https://github.com/wilson1yan/teco) and use `dmlab.sh` and `minecraft.sh` in their Dataset section of README, any maybe split bash script into parallel scripts.
+
+Then just run the corresponding commands:
 
 ### DMLab
 
