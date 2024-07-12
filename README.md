@@ -1,21 +1,21 @@
-# Transformer implementation Diffusion Forcing
+# 3D Unet / Temporal Attention implementation Diffusion Forcing
 
 #### [[Diffusion Forcing Website]](https://boyuan.space/diffusion-forcing) [[Original Implementation]](https://github.com/buoyancy99/diffusion-forcing)
 
-This is a transformer implementation of paper [Diffusion Forcing: Next-token Prediction Meets Full-Sequence Diffusion](https://boyuan.space/diffusion-forcing).
+This is a 3D Unet implementation of paper [Diffusion Forcing: Next-token Prediction Meets Full-Sequence Diffusion](https://boyuan.space/diffusion-forcing).
 
 This repo is coded by [Kiwhan Song](https://www.linkedin.com/in/kiwhan-song/), an amazing MIT undergrad working with Boyuan Chen and Vincent Sitzmann based on [Boyuan](https://boyuan.space/)'s research template repo.
 
-The content is not used in the original [Diffusion Forcing](https://boyuan.space/diffusion-forcing) paper but a reimplementation with better architecture for video generation. Original Diffusion Forcing code is RNN based to optimize for sequential decision making, while this repo uses Lucidrain's 3DUnet/Transformer optimized for video.
+The content is not used in the original [Diffusion Forcing](https://boyuan.space/diffusion-forcing) paper but a reimplementation with better architecture for video generation. Original Diffusion Forcing code is RNN based to optimize for sequential decision making, while this repo uses Lucidrain's 3DUnet/Attention optimized for video.
 
-This repo was released in a rush due to popularity of Diffusion Forcing among large model community, and may contain certain bugs which we will fix. Please allow us a few days to release checkpoints and adjust default parameters! Right now auto-regressive sampling with this repo is expected to be slow, since transformer essentially denoises the whole sequence but the only take the next token. We plan to finalize the parameters of pyramid sampling soon and maybe use that by default.
+This repo was released in a rush due to popularity of Diffusion Forcing among large model community, and may contain certain bugs which we will fix. Please allow us a few days to release checkpoints and adjust default parameters! Right now auto-regressive sampling with this repo is expected to be slow, since  essentially denoises the whole sequence but the only take the next token. We plan to finalize the parameters of pyramid sampling soon and maybe use that by default.
 
 # Project Instructions
 
 ## Setup
 
-Run `conda create python=3.10 -n df_transformer` to create environment.
-Run `conda activate df_transformer` to activate this environment.
+Run `conda create python=3.10 -n df_unet` to create environment.
+Run `conda activate df_unet` to activate this environment.
 Run `pip install -r requirements.txt` to install all dependencies.
 
 [Sign up](https://wandb.ai/site) a wandb account for cloud logging and checkpointing. In command line, run `wandb login` to login.
