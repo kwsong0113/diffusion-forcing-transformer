@@ -32,11 +32,11 @@ Minecraft:
 Autoregressively generate with 1x the length it's trained on:
 `python -m main +name=sample_minecraft_pretrained algorithm.weight_decay=0.002 algorithm.diffusion.network_size=64 algorithm.diffusion.attn_dim_head=64 algorithm.diffusion.attn_resolutions=[16,32,64,128] algorithm.diffusion.beta_schedule=sigmoid algorithm.diffusion.clip_noise=6.0 algorithm.diffusion.cum_snr_decay=0.96 algorithm.diffusion.stabilization_level=15 experiment.training.lr=8e-5 load=outputs/minecraft.ckpt experiment.tasks=[validation]`
 
-To let the model roll out longer than it's trained on, simply append `dataset.validation_multiplier=8` to the above commands, and it will rollout `8x` longer than maximum sequence length it's trained on.
+To let the model roll out **longer than it's trained on**, simply append `dataset.validation_multiplier=8` to the above commands, and it will rollout `8x` longer than maximum sequence length it's trained on.
 
 Our visualization is side by side, with prediction on the left and ground truth on the right. However, ground truth is expected to not align with prediction since the sequence is highly stochastic. Ground truth is provided to provide an idea about quality only.
 
-The above checkpoint is trained for 100K steps.
+The above checkpoint is trained for 100K steps with small number of frames. We've already verified diffusion forcing works in latent diffusion setting and can be extended to many more tokens without sacrificing compositionality with some special techniques, stay tuned for our next project!
 
 ## Training
 
