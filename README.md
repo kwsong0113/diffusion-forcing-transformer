@@ -8,7 +8,7 @@ This repo is coded by [Kiwhan Song](https://www.linkedin.com/in/kiwhan-song/), a
 
 The content is not used in the original [Diffusion Forcing](https://boyuan.space/diffusion-forcing) paper but a reimplementation with better architecture for video generation. Original Diffusion Forcing code is RNN based to optimize for sequential decision making, while this repo uses Lucidrain's 3DUnet/Attention optimized for video.
 
-This repo was released in a rush due to popularity of Diffusion Forcing among large model community, and may contain certain bugs which we will fix. Please allow us a few days to release checkpoints and adjust default parameters! Right now auto-regressive sampling with this repo is expected to be slow, since  essentially denoises the whole sequence but the only take the next token. We plan to finalize the parameters of pyramid sampling soon and maybe use that by default.
+This repo was originally part of our follow up project but we decided to release it early due to popularity of Diffusion Forcing among Generative AI community. Right now auto-regressive sampling with this repo is expected to be slow, since we haven't implemented causal attention caching. We've already verified diffusion forcing works in latent diffusion and can be extended to many more tokens without sacrificing compositionality with some special techniques, although those code will not be released immediately!
 
 # Project Instructions
 
@@ -36,7 +36,7 @@ To let the model roll out **longer than it's trained on**, simply append `datase
 
 Our visualization is side by side, with prediction on the left and ground truth on the right. However, ground truth is expected to not align with prediction since the sequence is highly stochastic. Ground truth is provided to provide an idea about quality only.
 
-The above checkpoint is trained for 100K steps with small number of frames. We've already verified diffusion forcing works in latent diffusion setting and can be extended to many more tokens without sacrificing compositionality with some special techniques, stay tuned for our next project!
+The above checkpoint is trained for 100K steps with small number of frames. We've already verified diffusion forcing works in latent diffusion setting and can be extended to many more tokens without sacrificing compositionality.
 
 ## Training
 
