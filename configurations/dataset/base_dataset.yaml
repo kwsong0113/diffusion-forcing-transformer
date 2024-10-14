@@ -1,3 +1,0 @@
-# This will be passed as the cfg to Dataset.__init__(cfg) of your dataset class
-
-debug: ${debug} # inherited from configurations/config.yaml
