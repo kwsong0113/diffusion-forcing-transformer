@@ -646,6 +646,7 @@ class HistoryGuidance:
             if len(self.hist_weights) == 1
             and len(self.hist_segments[0].freq_ranges) == 1
             and self.hist_segments[0].freq_ranges[0] == ALL
+            and self.hist_segments[0].freq_ranges_if_generated[0] == ALL
             else HistoryGuidanceManager(self, mask)
         )
 
@@ -903,7 +904,7 @@ class SimpleHistoryGuidanceManager:
     which may not be the case in some applications (e.g. parallel temporal super-resolution).
     `SimpleHistoryGuidanceManager` is a simplified version of `HistoryGuidanceManager`
     that does not require the same mask across the batch, but instead only applicable to
-    conditional sampling, or vanilla history guidance (HG-v).
+    conditional sampling, or vanilla history guidance (HG-v), without stabilization.
     """
 
     def __init__(self, history_guidance: "HistoryGuidance", mask: torch.Tensor):
@@ -939,18 +940,18 @@ class SimpleHistoryGuidanceManager:
         to_noise_levels = repeat(to_noise_levels, "b t -> b h t", h=2).clone()
 
         from_noise_levels[:, 0, :] = torch.where(
-            self.mask == 1,
+            self.mask >= 1,
             self.history_guidance.timesteps - 1,
             from_noise_levels[:, 0, :],
         )
         to_noise_levels[:, 0, :] = torch.where(
-            self.mask == 1,
+            self.mask >= 1,
             self.history_guidance.timesteps - 1,
             to_noise_levels[:, 0, :],
         )
 
         x[:, 0, :] = torch.where(
-            self._extend(self.mask == 1, x[:, 0, :]),
+            self._extend(self.mask >= 1, x[:, 0, :]),
             replacement_fn(x[:, 0, :], from_noise_levels[:, 0, :]),
             x[:, 0, :],
         )
